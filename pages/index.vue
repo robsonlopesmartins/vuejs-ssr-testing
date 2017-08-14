@@ -1,22 +1,19 @@
 <template>
-  <ul>
+  <section class="container">
     <h1>Teste simples de listagem</h1>
 
-    <div class="list" v-for="d in data">
-      <ul>
-        <li>
-          Name: {{ d.name }}
-        </li>
-        <li>
-          E-mail: {{ d.email }}
-        </li>
-        <li>
-          Company: {{ d.name }}
-        </li>
-      </ul>
-      <hr>
+    <div class="panel panel-default">
+      <div class="row">
+        <div class="col-xs-12 col-md-4" v-for="p in products">
+          <figure>
+            <img v-bind:src="p.picture">
+          </figure>
+          <h3>{{ p.title }}</h3>
+          <span>{{ p.price }}</span>
+        </div>
+      </div>
     </div>
-  </ul>
+  </section>
 </template>
 
 <script>
@@ -24,10 +21,16 @@
 
   export default {
     asyncData () {
-      return axios.get('http://104.236.225.42/teste.json')
+      return axios.get('https://api.myjson.com/bins/ey0c1')
         .then((res) => {
-          return { data: res.data.data }
+          return { products: res.data.products }
         })
     }
   }
 </script>
+
+<style media="screen">
+  body{
+    background: #f1f1f1;
+  }
+</style>
